@@ -1,0 +1,21 @@
+# version: '3.8'
+services:
+  mongodbService:
+    image: mongo
+# mongodbNetworkContainer should be the name of used for communication host name of the other container
+    container_name: mongodbNetworkContainer
+    volumes:
+      - testVolume:/data/db
+    ports:
+      - 27017:27017
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodbService
+volumes:
+  testVolume:
