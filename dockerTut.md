@@ -4,10 +4,21 @@ This will be used to create volume and test
 
 MongoDB data is stored in docker files in local
 
-```bash
+## Docker has 2 types of bind
+
+- Named bind
+
+```dockerfile
 docker volume create testVolume
 
 docker run -p 27018:27017 -v testVolume:/data/db mongo
+```
+
+- No Named bind
+
+```dockerfile
+# Here we need to give correct laptop path to store data in your laptop
+docker run -d -p 27017:27017 -v C:\yourLaptopPath:/data/db mongo
 ```
 
 ---
@@ -16,7 +27,7 @@ docker run -p 27018:27017 -v testVolume:/data/db mongo
 
 This will be used to test network and learn
 
-```bash
+```dockerfile
 docker network create testNetwork
 
 docker run --name mongodbNetworkContainer --network testNetwork mongo
