@@ -36,3 +36,23 @@ docker run --name mongodbNetworkContainer --network testNetwork mongo
 docker run -p 3000:3000 --network testNetwork node_network_volume_mongo:latest
 # node_network_volume_mongo:latest uses mongodbNetworkContainer as hostname instead of localhost
 ```
+
+# Context & Dockerfile path
+
+- Context = "." refers to copy this directory to the docker image.
+- Path = -f and docker file path/
+
+```dockerfile
+docker build -t node_network_volume_mongo -f ./docker/Dockerfile .
+```
+
+In docker-compose.yml it means same
+
+```yml
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+```
+
